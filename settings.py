@@ -1,9 +1,6 @@
 
 import os
 
-from domains import DOMAIN
-
-
 MONGO_HOST = os.getenv('MONGO_HOST')
 MONGO_PORT = os.getenv('MONGO_PORT')
 MONGO_USER = os.getenv('MONGO_USER')
@@ -20,3 +17,5 @@ IF_MATCH = False
 SOFT_DELETE = True
 SECRET_KEY = os.getenv("SECRET_KEY")
 API_VERSION = os.getenv("API_VERSION")
+
+from domains import *

@@ -15,5 +15,10 @@ USER_SCHEMA = {
         'required': True,
         'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
         'coerce': lower_string,
+    },
+    'password': {
+        'type': 'string',
+        'empty': False,
+        'required': True
     }
 }
