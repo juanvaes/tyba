@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  database:
+    image: mongo
+    container_name: mongo-container-tyba
+    ports:
+      - '27017-27019:27017-27019'
+    environment:
+      - MONGO_INITDB_ROOT_DATABASE=tybalocations
+    volumes:
+      - ./mongo-volume:/data/db
+  tybalocations:
+    image: juanves/tybalocations:1.0
+    container_name: tybalocapp
+    ports:
+      - 5000:5000
+    expose:
+      - 5000
+    environment:
+      - SECRET_KEY=efaodfha87yq84gfbuawc
+    depends_on:
+      - database
