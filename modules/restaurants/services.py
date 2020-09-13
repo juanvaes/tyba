@@ -1,7 +1,10 @@
 import requests
-from flask import Blueprint, current_app as app, request, jsonify
+import datetime
 
-from domains import USERS_DOMAIN
+from flask import Blueprint, current_app as app, request, jsonify
+from eve.methods.post import post_internal
+
+from domains import USERS_DOMAIN, TRANSACTIONS_DOMAIN
 
 from core.auth.decorators import login_required
 from modules.restaurants.utils import ZOMATO_API_KEY, ZOMATO_API_URI, ZOMATO_API_HEADERS
@@ -15,6 +18,15 @@ def get_restaurants():
     city = request.args.get('city')
     lat = request.args.get('lat')
     lon = request.args.get('lon')
+
+    transaction_response = post_internal(
+        TRANSACTIONS_DOMAIN,
+        {
+            'method': request.method,
+            'url': request.full_path,
+            'datetime': datetime.datetime.utcnow().strftime("%m/%d/%Y, %H:%M:%S")
+        }
+    )
 
     if city:
         location_response = requests.get(
