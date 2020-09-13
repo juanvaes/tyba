@@ -20,6 +20,7 @@ class TybaAuth(TokenAuth):
             user = db[USERS_DOMAIN].find_one({'_id': ObjectId(user_id)})
             if not user:
                 return False
+            self.set_user_or_token(user_id)
             return True 
         return False
 
